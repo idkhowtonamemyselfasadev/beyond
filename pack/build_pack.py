@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Assembles the Beyond the End resource pack: 3D item models, worn armour, and the music.
+"""Assembles the Beyond the End resource pack: 3D item models and the music.
 
     python3 pack/build_pack.py   -> release/BeyondTheEnd-Pack.zip (+ its sha1 printed)
                                     pack/preview.html (every model, drag to turn)
@@ -7,9 +7,7 @@
 Models: pack/models.py sculpts one 3D model per item (46). The mod stamps every item with
 custom_model_data string `beyond:<id>`; assets/minecraft/items/<base>.json selects on it
 and falls back to the vanilla definition (read out of the game jar, so armour trims keep
-working). Armour: each tier gets an equipment asset (assets/beyond/equipment/<tier>.json)
-with the vanilla metal texture tinted to the tier's colour; the mod points the pieces'
-`equippable` component at it.
+working). Worn armour keeps the vanilla metal look (a tinted version was tried and hated).
 
 CustomWeapons: that mod's pack overrides the same item files for five base items
 (iron/diamond/netherite sword, netherite axe and hoe). A client only keeps one file per
@@ -27,8 +25,6 @@ import os
 import shutil
 import sys
 import zipfile
-
-from PIL import Image
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import models  # noqa: E402
@@ -65,24 +61,6 @@ def vanilla(path):
         return z.read(path)
 
 
-def tint(png_bytes, colour):
-    """Recolour a greyscale-ish armour texture: keep the shading, replace the hue."""
-    img = Image.open(io.BytesIO(png_bytes)).convert("RGBA")
-    px = img.load()
-    cr, cg, cb = colour
-    for y in range(img.height):
-        for x in range(img.width):
-            r, g, b, a = px[x, y]
-            if a == 0:
-                continue
-            lum = (0.3 * r + 0.59 * g + 0.11 * b) / 255.0
-            lum = 0.25 + lum * 0.95           # lift the darks a little so the tint reads
-            px[x, y] = (min(255, int(cr * lum)), min(255, int(cg * lum)), min(255, int(cb * lum)), a)
-    buf = io.BytesIO()
-    img.save(buf, "PNG")
-    return buf.getvalue()
-
-
 def write(path, data):
     os.makedirs(os.path.dirname(path), exist_ok=True)
     mode = "wb" if isinstance(data, bytes) else "w"
@@ -102,7 +80,7 @@ def main():
     if os.path.exists(OUT):
         shutil.rmtree(OUT)
     write(os.path.join(OUT, "pack.mcmeta"), {"pack": {"pack_format": 75, "min_format": [75, 0], "max_format": [75, 99],
-                                                     "description": "Beyond the End: 3D items, armour and music"}})
+                                                     "description": "Beyond the End: 3D items and music"}})
 
     # ---- models and textures -------------------------------------------------------------------
     built = models.build_all()
@@ -146,15 +124,6 @@ def main():
         definition = item_definition(base, cases, fallback)
         definition.update(extra)
         write(os.path.join(OUT, "assets", "minecraft", "items", base + ".json"), definition)
-
-    # ---- worn armour per tier ------------------------------------------------------------------------
-    for tier, metal in TIER_BASE.items():
-        colour = models.TIERS[tier]["metal"]
-        for layer in ("humanoid", "humanoid_leggings"):
-            png = vanilla(f"assets/minecraft/textures/entity/equipment/{layer}/{metal}.png")
-            write(os.path.join(OUT, "assets", "beyond", "textures", "entity", "equipment", layer, tier + ".png"), tint(png, colour))
-        write(os.path.join(OUT, "assets", "beyond", "equipment", tier + ".json"),
-              {"layers": {"humanoid": [{"texture": f"beyond:{tier}"}], "humanoid_leggings": [{"texture": f"beyond:{tier}"}]}})
 
     # ---- music ---------------------------------------------------------------------------------------------
     events = {}

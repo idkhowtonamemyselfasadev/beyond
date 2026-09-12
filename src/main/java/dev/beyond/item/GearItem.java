@@ -6,13 +6,8 @@ import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.EquipmentSlotGroup;
 import net.minecraft.world.item.Item;
-import net.minecraft.resources.Identifier;
-import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.equipment.Equippable;
-import net.minecraft.world.item.equipment.EquipmentAssets;
 
-import java.util.Optional;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.component.ItemAttributeModifiers;
 
@@ -145,15 +140,6 @@ public final class GearItem extends BeyondItem {
         if (tier == Tier.AETERNIUM) {
             stack.set(DataComponents.DAMAGE_RESISTANT,
                     new net.minecraft.world.item.component.DamageResistant(net.minecraft.tags.DamageTypeTags.IS_FIRE));
-        }
-        // Worn armour draws from the pack's equipment asset for the tier (beyond:<tier>);
-        // without the pack the client falls back to the base metal's look.
-        Equippable worn = stack.get(DataComponents.EQUIPPABLE);
-        if (worn != null && kind.ordinal() >= Kind.HELMET.ordinal()) {
-            stack.set(DataComponents.EQUIPPABLE, new Equippable(worn.slot(), worn.equipSound(),
-                    Optional.of(ResourceKey.create(EquipmentAssets.ROOT_ID, Identifier.fromNamespaceAndPath("beyond", tier.id))),
-                    worn.cameraOverlay(), worn.allowedEntities(), worn.dispensable(), worn.swappable(),
-                    worn.damageOnHurt(), worn.equipOnInteract(), worn.canBeSheared(), worn.shearingSound()));
         }
     }
 

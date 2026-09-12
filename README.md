@@ -341,9 +341,9 @@ All level 2.
 For everyone: `/throne` says where the Hollow King's throne is, and `/endmusic install`
 sends the music pack.
 
-## The resource pack: 3D items, armour and music
+## The resource pack: 3D items and music
 
-`release/BeyondTheEnd-Pack.zip` (built by `pack/build_pack.py`) carries three things:
+`release/BeyondTheEnd-Pack.zip` (built by `pack/build_pack.py`) carries two things:
 
 - **A 3D model for every item** — all 46: the three tiers of tools and armour, the
   materials and the relics — sculpted in `pack/models.py` as voxel models the way vanilla's
@@ -351,9 +351,6 @@ sends the music pack.
   `custom_model_data` `beyond:<id>` and the pack's item definitions pick the model by it;
   a client without the pack sees the plain base item as before. `pack/preview.html` shows
   them all (drag to turn).
-- **Worn armour per tier** — Thallasium, Terminite and Aeternium armour show in their own
-  colours on the body (the vanilla metal texture tinted; `assets/beyond/equipment/`), because
-  each piece's `equippable` component points at the tier's equipment asset.
 - **The music** — see below.
 
 It also folds in the **CustomWeapons** models (a snapshot in `pack/vendor/`): both mods

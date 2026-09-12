@@ -116,7 +116,7 @@ public final class BeyondConfig {
     /** A direct download link to the pack zip. Empty disables the pack entirely. */
     /** The pack (3D models, armour, music) as released on GitHub; pack/build_pack.py prints the sha1. */
     public static final String PACK_URL = "https://github.com/idkhowtonamemyselfasadev/beyond/releases/download/v1.1.0/BeyondTheEnd-Pack.zip";
-    public static final String PACK_SHA1 = "970e1fda638b6590e2981a60059ec56f44aa2673";
+    public static final String PACK_SHA1 = "768e17fc0cfd6e621cf787334fc4995c3b1b867a";
     public String pack_url = PACK_URL;
     public String pack_sha1 = PACK_SHA1;
     public String pack_offer_message = "This server has 3D items, armour and music for the End. Want them?";
