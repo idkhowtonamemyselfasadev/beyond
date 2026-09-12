@@ -55,6 +55,7 @@ p='config/beyond.json'
 try: d=json.load(open(p))
 except Exception: d={}
 d['log_events']=True; d['structure_spacing_chunks']=6; d['portal_spacing_chunks']=10
+d['pack_url']=''   # the run is about the mod, not the download; section 10 checks nothing is pushed
 json.dump(d, open(p,'w'), indent=2)
 PY
 echo "beyond reload" >&3

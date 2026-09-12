@@ -98,7 +98,6 @@ public final class Beyond implements DedicatedServerModInitializer {
         INSTANCE = this;
         DataPackInstaller.install();
         BeyondItems.init();
-        dev.beyond.item.AreaMining.init();
         LOGGER.info("Beyond the End ready: {} biomes in data, {} items, {} forge recipes, {} structures",
                 BeyondCommands.BIOMES.size(), BeyondItems.ALL.size(), Forge.RECIPES.size(),
                 dev.beyond.world.Structures.TYPES.size());

@@ -114,9 +114,13 @@ public final class BeyondConfig {
     /** With pack_required off: ask in chat on join instead. */
     public boolean pack_offer_on_join = true;
     /** A direct download link to the pack zip. Empty disables the pack entirely. */
-    /** The pack (3D models, armour, music) as released on GitHub; pack/build_pack.py prints the sha1. */
-    public static final String PACK_URL = "https://github.com/idkhowtonamemyselfasadev/beyond/releases/download/v1.1.0/BeyondTheEnd-Pack.zip";
-    public static final String PACK_SHA1 = "768e17fc0cfd6e621cf787334fc4995c3b1b867a";
+    /**
+     * The one pack for the whole server: CustomWeapons' release zip carries this mod's models
+     * and music as well. With CustomWeapons installed that mod sends it and this one stays
+     * quiet (PackOffer.leftToCustomWeapons); alone, this mod sends the same zip.
+     */
+    public static final String PACK_URL = "https://github.com/idkhowtonamemyselfasadev/customweapons/releases/download/v1.6.1/CustomWeapons-Models.zip";
+    public static final String PACK_SHA1 = "37fc9c03e155ae80951beeb57ae7696994b7d1ca";
     public String pack_url = PACK_URL;
     public String pack_sha1 = PACK_SHA1;
     public String pack_offer_message = "This server has 3D items, armour and music for the End. Want them?";
@@ -156,6 +160,12 @@ public final class BeyondConfig {
             if (loaded.config_version < 3 && (loaded.pack_url == null || loaded.pack_url.isBlank())) {
                 loaded.pack_url = PACK_URL;
                 loaded.pack_sha1 = PACK_SHA1;
+            }
+            // The pack moved into the CustomWeapons release; a file on the old address follows.
+            if (loaded.pack_url != null && loaded.pack_url.contains("/beyond/releases/download/v1.1.0/")) {
+                loaded.pack_url = PACK_URL;
+                loaded.pack_sha1 = PACK_SHA1;
+                rewrite = true;
             }
             // Version 3: weapon damage came down to the base metal's. A file still carrying
             // the old numbers gets the new ones; a hand-tuned file keeps its own.

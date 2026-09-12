@@ -1,10 +1,8 @@
 package dev.beyond.item;
 
-import net.fabricmc.fabric.api.event.player.PlayerBlockBreakEvents;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
@@ -14,7 +12,8 @@ import net.minecraft.world.phys.HitResult;
 /**
  * The Aeternium Pickaxe mines 3×3.
  *
- * <p>When a block is broken with it, the eight blocks around it in the plane the player is
+ * <p>Called from {@code ServerPlayerGameModeMixin} after a block was really broken (no Fabric
+ * API here: the mod runs without it). The eight blocks around it in the plane the player is
  * facing go too: looking at a wall gives a 3×3 wall, looking down gives a 3×3 floor. Each
  * extra block is broken through the normal path ({@code ServerPlayerGameMode.destroyBlock}),
  * so drops, silk touch and fortune, tool damage and protection mods all apply exactly as if
@@ -32,12 +31,8 @@ public final class AreaMining {
     private AreaMining() {
     }
 
-    public static void init() {
-        PlayerBlockBreakEvents.AFTER.register(AreaMining::afterBreak);
-    }
-
-    private static void afterBreak(Level level, Player player, BlockPos pos, BlockState state, net.minecraft.world.level.block.entity.BlockEntity be) {
-        if (BUSY.get() || !(player instanceof ServerPlayer sp) || sp.isShiftKeyDown() || sp.isCreative()) {
+    public static void afterBreak(Level level, ServerPlayer sp, BlockPos pos, BlockState state) {
+        if (BUSY.get() || sp.isShiftKeyDown() || sp.isCreative()) {
             return;
         }
         ItemStack tool = sp.getMainHandItem();

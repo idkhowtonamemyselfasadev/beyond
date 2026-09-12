@@ -358,9 +358,11 @@ override the same five vanilla item files (iron/diamond/netherite sword, netheri
 hoe), a client keeps only one file per path, and this pack carries both sets of cases.
 Point CustomWeapons' `pack_url` at this zip too if both mods run on the server.
 
-The mod sends the pack to every player on join the way vanilla's `resource-pack` property
-would: `pack_url` and `pack_sha1` in the config default to the GitHub release
-(`https://github.com/idkhowtonamemyselfasadev/beyond/releases/download/v1.1.0/BeyondTheEnd-Pack.zip`);
+**One pack for the whole server:** the CustomWeapons release zip carries these models and
+the music as well, so `pack_url`/`pack_sha1` default to
+`https://github.com/idkhowtonamemyselfasadev/customweapons/releases/download/v1.6.1/CustomWeapons-Models.zip`,
+and when CustomWeapons is on the server this mod leaves the sending to it — players get one
+download. Alone, this mod sends that same zip the way vanilla's `resource-pack` property would:
 `pack_required` (on) kicks whoever declines with `pack_kick_message`, off it asks in chat
 instead. Every rebuild of the pack changes the sha1 (printed by `build_pack.py`), so a new
 pack means a new release asset and the new sha1 in the config.

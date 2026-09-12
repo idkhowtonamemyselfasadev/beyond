@@ -74,8 +74,19 @@ public final class PackOffer {
         return config.pack_offer_on_join && config.pack_url != null && !config.pack_url.isBlank();
     }
 
+    /**
+     * CustomWeapons' pack carries this mod's models and music too; when that mod is on the
+     * server it does the sending, so players get one download instead of two.
+     */
+    public static boolean leftToCustomWeapons() {
+        return net.fabricmc.loader.api.FabricLoader.getInstance().isModLoaded("customweapons");
+    }
+
     /** On join: the required dialog, or the chat question, depending on the config. */
     public void onJoin(ServerPlayer player, dev.beyond.BeyondConfig config) {
+        if (leftToCustomWeapons()) {
+            return;
+        }
         if (config.pack_required && config.pack_url != null && !config.pack_url.isBlank()) {
             push(player, config, true);
             return;

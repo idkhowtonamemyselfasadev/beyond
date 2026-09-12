@@ -51,11 +51,26 @@ public class ServerPlayerGameModeMixin {
     @org.spongepowered.asm.mixin.Final
     protected ServerPlayer player;
 
+    /** What stood at the block being broken, noted on entry for the 3x3 pickaxe on exit. */
+    private net.minecraft.world.level.block.state.BlockState beyond$breaking;
+
     /** A survival player cannot break a boss hall; the client is resynced by vanilla on a false. */
     @Inject(method = "destroyBlock(Lnet/minecraft/core/BlockPos;)Z", at = @At("HEAD"), cancellable = true)
     private void beyond$keepHalls(net.minecraft.core.BlockPos pos, CallbackInfoReturnable<Boolean> cir) {
         if (!dev.beyond.Halls.allowBreak(this.level, this.player, pos)) {
             cir.setReturnValue(false);
+            return;
+        }
+        this.beyond$breaking = this.level.getBlockState(pos);
+    }
+
+    /** After a real break: the Aeternium Pickaxe takes the eight blocks around it too. */
+    @Inject(method = "destroyBlock(Lnet/minecraft/core/BlockPos;)Z", at = @At("RETURN"))
+    private void beyond$areaMine(net.minecraft.core.BlockPos pos, CallbackInfoReturnable<Boolean> cir) {
+        net.minecraft.world.level.block.state.BlockState was = this.beyond$breaking;
+        this.beyond$breaking = null;
+        if (cir.getReturnValueZ() && was != null) {
+            dev.beyond.item.AreaMining.afterBreak(this.level, this.player, pos, was);
         }
     }
 }

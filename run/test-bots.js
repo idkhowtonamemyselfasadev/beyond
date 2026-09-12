@@ -3,6 +3,7 @@
 // bot hears, blocks the bot can see, items in its inventory), never from the harness's idea
 // of what should have happened.
 const mineflayer = require('/home/tim/claude/anticheat/test/node_modules/mineflayer');
+const { Vec3 } = require('/home/tim/claude/anticheat/test/node_modules/vec3');
 const fs = require('fs');
 
 const RUN = __dirname;
@@ -26,7 +27,8 @@ const STRUCTURES = ['violecite_ruin', 'crystal_shrine', 'amber_vault', 'shadow_n
 
 function connect(username) {
   return new Promise((resolve, reject) => {
-    const bot = mineflayer.createBot({ host: '127.0.0.1', port: PORT, username, version: '1.21.11', auth: 'offline' });
+    const bot = mineflayer.createBot({ host: '127.0.0.1', port: PORT, username, version: '1.21.11', auth: 'offline',
+      checkTimeoutInterval: 180000 });   // the tour stalls the server while it places castles; do not give up at 30 s
     bot.chats = [];
     bot.log = [];          // never cleared: everything the bot was ever told
     bot.waypoints = [];    // clientbound tracked_waypoint packets (the locator bar mark)
@@ -96,6 +98,10 @@ async function main() {
 
   // -------------------------------------------------------------- 2. every biome
   console.log('\n== 2. every biome generates and can be reached ==');
+  // Creative for the tour: a landing on a shard while the server stalls placing a castle
+  // otherwise reads as flying and gets a survival client kicked mid-way. Back to survival
+  // for everything after, which is what the later checks assume.
+  cmd('gamemode creative Explorer');
   const found = [];
   const where = [];   // [x, z] of every biome reached, to search again from somewhere else
   const tpTo = async (biome) => {
@@ -140,6 +146,8 @@ async function main() {
       `${found.length}/${BIOMES.length}`);
 
   // ------------------------------------------------------ 3. structures generated
+  cmd('gamemode survival Explorer');
+  await sleep(500);
   console.log('\n== 3. structures generated on their own while exploring ==');
   bot.chats.length = 0;
   bot.chat('/beyond sites');
@@ -211,40 +219,44 @@ async function main() {
   await sleep(1500);
   check(said(bot, /ADV_FORGE/) && said(bot, /ADV_THALLASIUM/), 'the forge advancements were granted');
 
-  // The Aeternium Pickaxe mines 3x3: a 3x3x1 stone wall two blocks away, break the centre,
-  // all nine must go; sneaking breaks one. Obsidian beside stone stays (harder than the hit).
+  // The Aeternium Pickaxe mines 3x3: a fresh pad, a 3x3 stone wall two blocks east of the
+  // bot, break the centre, all nine must go; sneaking breaks one. Obsidian in the wall stays
+  // (harder than the block hit). Console commands run in the overworld unless told otherwise.
   {
-    const bp = bot.entity.position.floored();
-    const wx = bp.x + 2, wy = bp.y, wz = bp.z;   // wall in the +x direction, facing it along x
-    cmd(`fill ${wx} ${wy - 1} ${wz - 1} ${wx} ${wy + 1} ${wz + 1} minecraft:stone`);
-    cmd(`setblock ${wx} ${wy + 1} ${wz + 1} minecraft:obsidian`);
+    await pad(560, 500, 10);
+    const E = 'execute in minecraft:the_end run ';
+    const wx = 562, wy = 71, wz = 500;   // wall column x, bottom row y, centre z; the bot stands at 560, feet on 71
+    const wallCmd = () => cmd(`${E}fill ${wx} ${wy} ${wz - 1} ${wx} ${wy + 2} ${wz + 1} minecraft:stone`);
+    wallCmd();
+    cmd(`${E}setblock ${wx} ${wy + 2} ${wz + 1} minecraft:obsidian`);
     cmd('clear Explorer'); cmd('beyond give Explorer aeternium_pickaxe'); cmd('gamemode survival Explorer');
     await sleep(1500);
-    await bot.look(-Math.PI / 2, 0, true);   // mineflayer yaw: -PI/2 faces +x
+    await bot.look(-Math.PI / 2, 0, true);   // mineflayer yaw -PI/2 faces +x
     await sleep(300);
-    const wall = bot.blockAt(new Vec3(wx, wy, wz));
     const dig = async (b) => { try { await Promise.race([bot.dig(b), sleep(8000)]); } catch (e) { console.log('   dig: ' + e.message); } };
-    if (wall && wall.name === 'stone') await dig(wall);
+    const centre = () => bot.blockAt(new Vec3(wx, wy + 1, wz));
+    console.log('   wall centre reads as ' + ((centre() || {}).name));
+    if (centre() && centre().name === 'stone') await dig(centre());
     await sleep(1500);
-    cmd(`execute if block ${wx} ${wy} ${wz} minecraft:air if block ${wx} ${wy - 1} ${wz - 1} minecraft:air if block ${wx} ${wy + 1} ${wz - 1} minecraft:air if block ${wx} ${wy - 1} ${wz + 1} minecraft:air if block ${wx} ${wy} ${wz + 1} minecraft:air run say AREA_OK`);
-    cmd(`execute if block ${wx} ${wy + 1} ${wz + 1} minecraft:obsidian run say OBS_STAYS`);
+    cmd(`${E}execute if block ${wx} ${wy + 1} ${wz} minecraft:air if block ${wx} ${wy} ${wz - 1} minecraft:air if block ${wx} ${wy + 2} ${wz - 1} minecraft:air if block ${wx} ${wy} ${wz + 1} minecraft:air if block ${wx} ${wy + 1} ${wz + 1} minecraft:air run say AREA_OK`);
+    cmd(`${E}execute if block ${wx} ${wy + 2} ${wz + 1} minecraft:obsidian run say OBS_STAYS`);
     await sleep(1200);
     check(said(bot, /AREA_OK/), 'the Aeternium Pickaxe mines 3x3 (stone wall gone)');
     check(said(bot, /OBS_STAYS/), 'but leaves the obsidian, harder than the block hit');
-    cmd(`fill ${wx} ${wy - 1} ${wz - 1} ${wx} ${wy + 1} ${wz + 1} minecraft:stone`);
-    await sleep(800);
+    wallCmd();
+    await sleep(1000);
     bot.setControlState('sneak', true);
     await sleep(300);
-    const wall2 = bot.blockAt(new Vec3(wx, wy, wz));
-    if (wall2 && wall2.name === 'stone') await dig(wall2);
+    if (centre() && centre().name === 'stone') await dig(centre());
     bot.setControlState('sneak', false);
     await sleep(1200);
-    cmd(`execute if block ${wx} ${wy} ${wz} minecraft:air if block ${wx} ${wy + 1} ${wz} minecraft:stone if block ${wx} ${wy} ${wz + 1} minecraft:stone run say SNEAK_OK`);
+    cmd(`${E}execute if block ${wx} ${wy + 1} ${wz} minecraft:air if block ${wx} ${wy + 2} ${wz} minecraft:stone if block ${wx} ${wy + 1} ${wz + 1} minecraft:stone run say SNEAK_OK`);
     await sleep(1200);
     check(said(bot, /SNEAK_OK/), 'sneaking mines a single block');
-    cmd(`fill ${wx} ${wy - 1} ${wz - 1} ${wx} ${wy + 1} ${wz + 1} minecraft:air`);
+    cmd(`${E}fill ${wx} ${wy} ${wz - 1} ${wx} ${wy + 2} ${wz + 1} minecraft:air`);
     cmd('clear Explorer');   // the bot stays in survival, as the rest of the walk expects
     await sleep(800);
+    await pad(500, 500, 10);   // back beside the forge for the /forge check
   }
 
   // /forge opens the same screen for a plain player, no shape and no op needed.
@@ -354,7 +366,6 @@ async function main() {
   // wakes the boss: the server says which entity woke and with what health. Killing it must
   // drop its relic, named. Then the halls' footprint is protected like the Throne City.
   console.log('\n== 8b. the Void Crypt, the Storm Spire, and what sleeps in them ==');
-  const { Vec3 } = require('/home/tim/claude/anticheat/test/node_modules/vec3');
   const bosses = [
     { hall: 'void_crypt', dais: 'sculk_shrieker', boss: 'warden', tag: 'beyond_void_warden', name: 'Void Warden',
       relic: /Void Heart/, relicName: 'Void Heart', relicItem: 'nether_star', hp: 600 },
