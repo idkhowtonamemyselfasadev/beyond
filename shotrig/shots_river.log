@@ -1,0 +1,20 @@
+client exit 0
+3 screenshots in /home/tim/claude/beyond/shotrig/shots
+[13:44:33] [Render thread/INFO] (cwshot) script: shot 03_river_topdown
+[13:44:33] [Render thread/INFO] (cwshot) script: cmd execute in minecraft:the_end run tp @s ~ ~-18 ~
+[13:44:33] [Render thread/INFO] (cwshot) script: wait 30
+[13:44:33] [IO-Worker-1/INFO] (cwshot) screenshot Saved screenshot as 03_river_topdown.png
+[13:44:34] [Render thread/INFO] (cwshot) script: look 45 60
+[13:44:34] [Render thread/INFO] (cwshot) script: shot 04_river_oblique
+[13:44:34] [Render thread/INFO] (cwshot) script: look -135 60
+[13:44:35] [Render thread/INFO] (cwshot) script: shot 05_river_oblique_back
+[13:44:35] [Render thread/INFO] (cwshot) script: wait 10
+[13:44:35] [IO-Worker-1/INFO] (cwshot) screenshot Saved screenshot as 04_river_oblique.png
+[13:44:35] [IO-Worker-2/INFO] (cwshot) screenshot Saved screenshot as 05_river_oblique_back.png
+[13:44:35] [Render thread/INFO] (cwshot) script: quit
+[13:43:42] [main/INFO]: Loaded 1471 recipes
+[13:43:42] [main/INFO]: Loaded 1597 advancements
+[13:44:00] [Server thread/INFO]: Structure placed: sunken_observatory at -3368 58 -2952
+[13:44:10] [Server thread/INFO]: River carved: 36 blocks from -3544 59 -1656
+[13:44:12] [Server thread/INFO]: Structure placed: starfall_cairn at -3768 54 -1608
+[13:44:29] [Server thread/INFO]: Structure placed: sunken_observatory at -3448 59 -1560

@@ -1,0 +1,83 @@
+{
+  "attributes": {
+    "minecraft:visual/fog_color": "#22304a",
+    "minecraft:visual/sky_color": "#000000",
+    "minecraft:visual/water_fog_color": "#0c1424",
+    "minecraft:visual/ambient_particles": [
+      {
+        "particle": {
+          "type": "minecraft:ash"
+        },
+        "probability": 0.014
+      }
+    ],
+    "minecraft:audio/ambient_sounds": {
+      "mood": {
+        "sound": "minecraft:ambient.cave",
+        "tick_delay": 6000,
+        "block_search_extent": 8,
+        "offset": 2.0
+      }
+    },
+    "minecraft:audio/background_music": {
+      "default": {
+        "sound": {
+          "sound_id": "beyond:music.beyond.abyssal"
+        },
+        "min_delay": 6000,
+        "max_delay": 12000,
+        "replace_current_music": false
+      }
+    }
+  },
+  "carvers": [],
+  "downfall": 0.5,
+  "effects": {
+    "water_color": "#1f3a6a"
+  },
+  "features": [
+    [],
+    [],
+    [
+      "beyond:dust_gravel"
+    ],
+    [],
+    [
+      "minecraft:end_spike",
+      "minecraft:end_gateway_return"
+    ],
+    [],
+    [
+      "beyond:thallasium_ore",
+      "beyond:thallasium_common"
+    ],
+    [],
+    [],
+    [
+      "beyond:dust_bones"
+    ],
+    [
+      "minecraft:end_platform"
+    ]
+  ],
+  "has_precipitation": false,
+  "spawn_costs": {},
+  "spawners": {
+    "ambient": [],
+    "axolotls": [],
+    "creature": [],
+    "misc": [],
+    "monster": [
+      {
+        "type": "minecraft:enderman",
+        "weight": 10,
+        "minCount": 4,
+        "maxCount": 4
+      }
+    ],
+    "underground_water_creature": [],
+    "water_ambient": [],
+    "water_creature": []
+  },
+  "temperature": 0.5
+}

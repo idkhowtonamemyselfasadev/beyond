@@ -1,0 +1,37 @@
+{
+  "type": "minecraft:disk",
+  "config": {
+    "half_height": 3,
+    "radius": {
+      "type": "minecraft:uniform",
+      "min_inclusive": 6,
+      "max_inclusive": 8
+    },
+    "state_provider": {
+      "fallback": {
+        "type": "minecraft:simple_state_provider",
+        "state": {
+          "Name": "minecraft:water",
+          "Properties": {
+            "level": "0"
+          }
+        }
+      },
+      "rules": []
+    },
+    "target": {
+      "type": "minecraft:matching_blocks",
+      "blocks": [
+        "minecraft:moss_block",
+        "minecraft:dirt",
+        "minecraft:end_stone",
+        "minecraft:mycelium",
+        "minecraft:terracotta",
+        "minecraft:packed_mud",
+        "minecraft:yellow_terracotta",
+        "minecraft:tuff",
+        "minecraft:rooted_dirt"
+      ]
+    }
+  }
+}

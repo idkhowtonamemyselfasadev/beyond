@@ -1,0 +1,90 @@
+{
+  "structures": [
+    {
+      "structure": "beyond:void_spire",
+      "weight": 1
+    },
+    {
+      "structure": "beyond:watchspire",
+      "weight": 1
+    },
+    {
+      "structure": "beyond:obsidian_gate",
+      "weight": 1
+    },
+    {
+      "structure": "beyond:crystal_cathedral",
+      "weight": 1
+    },
+    {
+      "structure": "beyond:starforge",
+      "weight": 1
+    },
+    {
+      "structure": "beyond:shulker_hive",
+      "weight": 1
+    },
+    {
+      "structure": "beyond:chorus_titan",
+      "weight": 1
+    },
+    {
+      "structure": "beyond:mausoleum_of_wings",
+      "weight": 1
+    },
+    {
+      "structure": "beyond:shadow_keep",
+      "weight": 1
+    },
+    {
+      "structure": "beyond:frozen_beacon",
+      "weight": 1
+    },
+    {
+      "structure": "beyond:amber_hall",
+      "weight": 1
+    },
+    {
+      "structure": "beyond:dragon_shrine",
+      "weight": 1
+    },
+    {
+      "structure": "beyond:dust_throne",
+      "weight": 1
+    },
+    {
+      "structure": "beyond:sunken_vault",
+      "weight": 1
+    },
+    {
+      "structure": "beyond:endermans_folly",
+      "weight": 1
+    },
+    {
+      "structure": "beyond:ring_monument",
+      "weight": 1
+    },
+    {
+      "structure": "beyond:bridgeway",
+      "weight": 1
+    },
+    {
+      "structure": "beyond:void_well",
+      "weight": 1
+    },
+    {
+      "structure": "beyond:pillar_field",
+      "weight": 1
+    },
+    {
+      "structure": "beyond:shattered_hull",
+      "weight": 1
+    }
+  ],
+  "placement": {
+    "type": "minecraft:random_spread",
+    "spacing": 26,
+    "separation": 11,
+    "salt": 7719431
+  }
+}

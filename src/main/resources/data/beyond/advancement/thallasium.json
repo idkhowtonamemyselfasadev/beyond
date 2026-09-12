@@ -1,0 +1,29 @@
+{
+  "display": {
+    "icon": {
+      "id": "minecraft:iron_ingot",
+      "components": {
+        "minecraft:custom_data": {
+          "beyond_item": "thallasium_ingot"
+        }
+      }
+    },
+    "title": "Thallasium",
+    "description": "Forge the first ingot of the End's own metal",
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "granted": {
+      "trigger": "minecraft:impossible"
+    }
+  },
+  "requirements": [
+    [
+      "granted"
+    ]
+  ],
+  "parent": "beyond:forge_lit"
+}

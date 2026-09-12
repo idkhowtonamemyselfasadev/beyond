@@ -1,0 +1,53 @@
+{
+  "type": "minecraft:random_patch",
+  "config": {
+    "tries": 24,
+    "xz_spread": 6,
+    "y_spread": 3,
+    "feature": {
+      "feature": {
+        "type": "minecraft:simple_block",
+        "config": {
+          "to_place": {
+            "type": "minecraft:weighted_state_provider",
+            "entries": [
+              {
+                "data": {
+                  "Name": "minecraft:torchflower"
+                },
+                "weight": 3
+              },
+              {
+                "data": {
+                  "Name": "minecraft:end_rod",
+                  "Properties": {
+                    "facing": "up"
+                  }
+                },
+                "weight": 2
+              },
+              {
+                "data": {
+                  "Name": "minecraft:pitcher_plant",
+                  "Properties": {
+                    "half": "lower"
+                  }
+                },
+                "weight": 1
+              }
+            ]
+          }
+        }
+      },
+      "placement": [
+        {
+          "type": "minecraft:block_predicate_filter",
+          "predicate": {
+            "type": "minecraft:matching_blocks",
+            "blocks": "minecraft:air"
+          }
+        }
+      ]
+    }
+  }
+}

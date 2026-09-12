@@ -1,0 +1,21 @@
+client exit 0
+14 screenshots in /home/tim/claude/beyond/shotrig/shots
+[13:28:54] [Render thread/INFO] (cwshot) script: cmd beyond tp structure throne_city
+[13:28:54] [Render thread/INFO] (cwshot) script: wait 300
+[13:28:54] [IO-Worker-1/INFO] (cwshot) screenshot Saved screenshot as 12_bastion_above.png
+[13:29:09] [Render thread/INFO] (cwshot) script: look 0 10
+[13:29:10] [Render thread/INFO] (cwshot) script: shot 13_throne_city
+[13:29:10] [Render thread/INFO] (cwshot) script: cmd execute in minecraft:the_end run tp @s ~-50 ~30 ~-50 facing ~ ~ ~
+[13:29:10] [Render thread/INFO] (cwshot) script: wait 80
+[13:29:10] [IO-Worker-1/INFO] (cwshot) screenshot Saved screenshot as 13_throne_city.png
+[13:29:14] [Render thread/INFO] (cwshot) script: shot 14_throne_city_above
+[13:29:14] [Render thread/INFO] (cwshot) script: wait 10
+[13:29:14] [IO-Worker-1/INFO] (cwshot) screenshot Saved screenshot as 14_throne_city_above.png
+[13:29:14] [Render thread/INFO] (cwshot) script: quit
+[13:26:25] [main/INFO]: Loaded 1471 recipes
+[13:26:25] [main/INFO]: Loaded 1597 advancements
+[13:26:44] [Server thread/INFO]: Structure placed: sunken_observatory at -3368 58 -2952
+[13:26:55] [Server thread/INFO]: Structure placed: sunken_observatory at -3176 60 -3080
+[13:27:28] [Server thread/INFO]: Structure placed: starfall_cairn at -3496 64 -3368
+[13:27:28] [Server thread/INFO]: Structure placed: crystal_shrine at -3512 59 -3208
+[13:27:50] [Server thread/INFO]: River carved: 91 blocks from -3544 62 -3368

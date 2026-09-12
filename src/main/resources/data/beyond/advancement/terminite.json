@@ -1,0 +1,29 @@
+{
+  "display": {
+    "icon": {
+      "id": "minecraft:copper_ingot",
+      "components": {
+        "minecraft:custom_data": {
+          "beyond_item": "terminite_ingot"
+        }
+      }
+    },
+    "title": "Terminite",
+    "description": "Forge Terminite - an alloy that laughs at diamond",
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "granted": {
+      "trigger": "minecraft:impossible"
+    }
+  },
+  "requirements": [
+    [
+      "granted"
+    ]
+  ],
+  "parent": "beyond:thallasium"
+}

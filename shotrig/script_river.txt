@@ -1,0 +1,23 @@
+wait 60
+cmd gamemode spectator
+cmd time set 6000
+cmd beyond tp megalake
+wait 200
+cmd beyond tp glowing_grasslands
+wait 200
+cmd beyond tp lantern_woods
+wait 200
+cmd beyond tp river
+wait 60
+cmd execute in minecraft:the_end run tp @s ~ ~30 ~
+wait 30
+look 0 88
+shot 03_river_topdown
+cmd execute in minecraft:the_end run tp @s ~ ~-18 ~
+wait 30
+look 45 60
+shot 04_river_oblique
+look -135 60
+shot 05_river_oblique_back
+wait 10
+quit

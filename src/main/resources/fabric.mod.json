@@ -1,0 +1,13 @@
+{
+  "schemaVersion": 1,
+  "id": "beyond",
+  "version": "${version}",
+  "name": "Beyond the End",
+  "description": "A new End: fourteen biomes, ruins and shrines with their own loot, a metal progression past netherite, new creatures, and a way home. Server-side only and dependency free - everyone joins with a vanilla client and installs nothing.",
+  "authors": ["Tim"],
+  "license": "MIT",
+  "environment": "server",
+  "entrypoints": { "server": ["dev.beyond.Beyond"] },
+  "mixins": ["beyond.mixins.json"],
+  "depends": { "fabricloader": ">=0.15.0", "minecraft": ">=1.21.11 <1.22", "java": ">=21" }
+}

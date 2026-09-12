@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:multiface_growth",
+  "config": {
+    "block": "minecraft:glow_lichen",
+    "can_be_placed_on": [
+      "minecraft:mushroom_stem",
+      "minecraft:brown_mushroom_block",
+      "minecraft:end_stone",
+      "minecraft:mycelium"
+    ],
+    "can_place_on_ceiling": true,
+    "can_place_on_floor": true,
+    "can_place_on_wall": true,
+    "chance_of_spreading": 0.5,
+    "search_range": 12
+  }
+}

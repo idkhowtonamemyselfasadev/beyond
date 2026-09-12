@@ -1,0 +1,70 @@
+# Beyond the End: the throne marker, a river, the three castles, the throne city.
+wait 60
+cmd gamemode creative
+cmd time set 6000
+cmd weather clear
+cmd beyond tp megalake
+wait 200
+look -90 8
+shot 01_end_arrival_marker
+cmd throne
+wait 20
+shot 02_throne_command
+cmd gamemode spectator
+cmd beyond tp structure throne_city
+wait 400
+cmd beyond tp river
+wait 120
+look 0 20
+shot 03_river_ground
+cmd execute in minecraft:the_end run tp @s ~-18 ~14 ~-18 facing ~ ~ ~
+wait 60
+shot 04_river_above
+cmd execute in minecraft:the_end run tp @s ~36 ~ ~36 facing ~ ~ ~
+wait 60
+shot 05_river_other_side
+cmd beyond tp dust_wastelands
+wait 200
+cmd beyond build obsidian_fortress
+wait 200
+cmd beyond tp structure obsidian_fortress
+wait 60
+look 0 15
+shot 06_fortress_courtyard
+cmd execute in minecraft:the_end run tp @s ~-70 ~40 ~-70 facing ~ ~ ~
+wait 80
+shot 07_fortress_above
+cmd execute in minecraft:the_end run tp @s ~140 ~ ~ facing ~ ~ ~
+wait 80
+shot 08_fortress_other_side
+cmd beyond tp crystal_mountains
+wait 200
+cmd beyond build purpur_citadel
+wait 200
+cmd beyond tp structure purpur_citadel
+wait 60
+look 0 15
+shot 09_citadel_ground
+cmd execute in minecraft:the_end run tp @s ~-70 ~45 ~-70 facing ~ ~ ~
+wait 80
+shot 10_citadel_above
+cmd beyond tp foggy_mushroomland
+wait 200
+cmd beyond build tide_bastion
+wait 200
+cmd beyond tp structure tide_bastion
+wait 60
+look 0 15
+shot 11_bastion_ground
+cmd execute in minecraft:the_end run tp @s ~-70 ~40 ~-70 facing ~ ~ ~
+wait 80
+shot 12_bastion_above
+cmd beyond tp structure throne_city
+wait 300
+look 0 10
+shot 13_throne_city
+cmd execute in minecraft:the_end run tp @s ~-50 ~30 ~-50 facing ~ ~ ~
+wait 80
+shot 14_throne_city_above
+wait 10
+quit

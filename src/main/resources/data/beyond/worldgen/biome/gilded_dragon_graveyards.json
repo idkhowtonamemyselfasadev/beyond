@@ -1,0 +1,84 @@
+{
+  "attributes": {
+    "minecraft:visual/fog_color": "#c9a83f",
+    "minecraft:visual/sky_color": "#000000",
+    "minecraft:visual/water_fog_color": "#5a4a12",
+    "minecraft:visual/ambient_particles": [
+      {
+        "particle": {
+          "type": "minecraft:end_rod"
+        },
+        "probability": 0.006
+      }
+    ],
+    "minecraft:audio/ambient_sounds": {
+      "loop": "minecraft:ambient.soul_sand_valley.loop",
+      "mood": {
+        "sound": "minecraft:ambient.soul_sand_valley.mood",
+        "tick_delay": 6000,
+        "block_search_extent": 8,
+        "offset": 2.0
+      }
+    },
+    "minecraft:audio/background_music": {
+      "default": {
+        "sound": {
+          "sound_id": "beyond:music.beyond.gilded"
+        },
+        "min_delay": 6000,
+        "max_delay": 12000,
+        "replace_current_music": false
+      }
+    }
+  },
+  "carvers": [],
+  "downfall": 0.5,
+  "effects": {
+    "water_color": "#d8b84a"
+  },
+  "features": [
+    [],
+    [],
+    [],
+    [],
+    [
+      "minecraft:end_spike",
+      "minecraft:end_gateway_return"
+    ],
+    [],
+    [
+      "beyond:thallasium_common"
+    ],
+    [],
+    [],
+    [
+      "beyond:grave_fungi",
+      "beyond:bone_pillars",
+      "beyond:grave_bones",
+      "beyond:grave_fireflies"
+    ],
+    [
+      "minecraft:end_platform"
+    ]
+  ],
+  "has_precipitation": false,
+  "spawn_costs": {},
+  "spawners": {
+    "ambient": [],
+    "axolotls": [],
+    "creature": [],
+    "misc": [],
+    "monster": [
+      {
+        "type": "minecraft:enderman",
+        "weight": 10,
+        "minCount": 4,
+        "maxCount": 4
+      }
+    ],
+    "underground_water_creature": [],
+    "water_ambient": [],
+    "water_creature": []
+  },
+  "temperature": 0.5
+}

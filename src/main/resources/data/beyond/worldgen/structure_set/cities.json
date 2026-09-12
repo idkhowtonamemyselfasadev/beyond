@@ -1,0 +1,54 @@
+{
+  "structures": [
+    {
+      "structure": "beyond:spire_city",
+      "weight": 3
+    },
+    {
+      "structure": "beyond:bridge_city",
+      "weight": 3
+    },
+    {
+      "structure": "beyond:hanging_city",
+      "weight": 3
+    },
+    {
+      "structure": "beyond:wreck_city",
+      "weight": 3
+    },
+    {
+      "structure": "beyond:crystal_city",
+      "weight": 3
+    },
+    {
+      "structure": "beyond:library_city",
+      "weight": 3
+    },
+    {
+      "structure": "beyond:drowned_city",
+      "weight": 3
+    },
+    {
+      "structure": "beyond:beacon_city",
+      "weight": 3
+    },
+    {
+      "structure": "beyond:sail_city",
+      "weight": 3
+    },
+    {
+      "structure": "beyond:gate_city",
+      "weight": 3
+    },
+    {
+      "structure": "beyond:throne_city",
+      "weight": 1
+    }
+  ],
+  "placement": {
+    "type": "minecraft:random_spread",
+    "spacing": 14,
+    "separation": 6,
+    "salt": 5512377
+  }
+}

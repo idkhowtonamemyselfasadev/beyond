@@ -1,0 +1,29 @@
+{
+  "display": {
+    "icon": {
+      "id": "minecraft:netherite_ingot",
+      "components": {
+        "minecraft:custom_data": {
+          "beyond_item": "aeternium_ingot"
+        }
+      }
+    },
+    "title": "Aeternium",
+    "description": "Forge Aeternium. Nothing is harder.",
+    "frame": "challenge",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "granted": {
+      "trigger": "minecraft:impossible"
+    }
+  },
+  "requirements": [
+    [
+      "granted"
+    ]
+  ],
+  "parent": "beyond:terminite"
+}
