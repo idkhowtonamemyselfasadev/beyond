@@ -276,6 +276,9 @@ and an end portal in the End is vanilla's own way out.
 | | Built on | Where | Drops |
 |---|---|---|---|
 | **Shadow Walker** | wither skeleton, unarmed, faster, tougher | Shadow Forest | Shadow Essence — and its touch **blinds** |
+
+(The mod also carries the wither skeleton's loot table, so the Nether's wither skeletons drop
+their **skull 40 % of the time** — 50/60/70 % with Looting I/II/III — instead of vanilla's 2.5 %.)
 | **End Slime** | slime | Amber Land, Chorus Forest, Foggy Mushroomland, Megalake | |
 | **Cubozoa** | glow squid | the lakes | Gelatine |
 | **End Fish** | cod | the lakes | End Fish, a proper meal |
